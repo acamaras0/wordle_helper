@@ -57,7 +57,39 @@ class WordleCli:
 
     def ask_for_guess(self):
         guess = input("Quess the 5 letter word:")
-        print(self.wordle.give_assessment(guess))
+        assessment = self.wordle.give_assessment(guess)
+        if len(assessment["green"]) == 5:
+            return True
+        print(assessment)
+        return False
+
+    def play(self):
+        count = 6
+        mode = None
+
+        while mode not in ["AI", "me"]:
+            mode = input("Would you like to play the game yourself or let AI decide?(me/AI)")
+        if mode == "AI":
+            print("Well too bad, because that isn't implemented yet")
+        print("\n")
+        congratulations = {
+            5: "Hey, that's suspiciously good... how did you know....?",
+            4: "WHOA! AMAZING! YOU ARE ASTONISHINGLY GOOOOOOOOOOOOOOOOD at this",
+            3: "Way better than average, congratulations!!!!!",
+            2: "You're pretty good at this!",
+            1: "Cutting close, but victory is a victory...",
+        }
+
+        victory = False
+        while count > 0 and not victory:
+            victory = self.ask_for_guess()
+            if victory:
+                print(congratulations[count])
+                break
+            self.get_wordle_result()
+            print("\n")
+            count -= 1
+
 
 """
  ___________________________________________
