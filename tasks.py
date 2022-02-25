@@ -7,8 +7,8 @@ def start(ctx):
 
 @task
 def test(ctx):
-    os.chdir(".src")
-    ctx.run("pytest")
+    os.chdir("./src")
+    ctx.run("pytest --color=yes")
 
 @task
 def coverage(ctx):
@@ -21,3 +21,5 @@ def coverage_report(ctx):
 @task
 def lint(ctx):
     ctx.run("pylint src")
+
+#make rule for automatic simulation and report(or maybe implement this in game GUI?)
